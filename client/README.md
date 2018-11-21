@@ -1,4 +1,4 @@
-# ui
+# blue-coin-ui
 
 ## Run Project
 
