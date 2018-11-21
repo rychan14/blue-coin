@@ -2,12 +2,9 @@
 
 import * as ReactDOMRe from "./../../../node_modules/reason-react/lib/es6_global/src/ReactDOMRe.js";
 import * as ReasonReact from "./../../../node_modules/reason-react/lib/es6_global/src/ReasonReact.js";
-import * as Component1$ReactTemplate from "./Component1.bs.js";
-import * as Component2$ReactTemplate from "./Component2.bs.js";
+import * as App$ReactTemplate from "./App.bs.js";
 
-ReactDOMRe.renderToElementWithId(ReasonReact.element(undefined, undefined, Component1$ReactTemplate.make("Hello!", /* array */[])), "index1");
-
-ReactDOMRe.renderToElementWithId(ReasonReact.element(undefined, undefined, Component2$ReactTemplate.make("Hello!", /* array */[])), "index2");
+ReactDOMRe.renderToElementWithId(ReasonReact.element(undefined, undefined, App$ReactTemplate.make(undefined, /* array */[])), "main");
 
 export {
   
