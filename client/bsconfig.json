@@ -12,8 +12,8 @@
     "subdirs" : true
   },
   "package-specs": [{
-    "module": "commonjs",
-    "in-source": true
+    "module": "es6-global",
+    "in-source": false
   }],
   "suffix": ".bs.js",
   "namespace": true,
