@@ -7,20 +7,22 @@
  */
 
 /** @jsx jsx */
-import React from 'react';
-import { Helmet } from 'react-helmet';
-import styled from 'styled-components';
-import { css, jsx } from '@emotion/core';
-import { Switch, Route } from 'react-router-dom';
-import { Flex, Box } from '@rebass/grid';
+import React from 'react'
+import { Helmet } from 'react-helmet'
+// import styled from 'styled-components';
+import { css, jsx } from '@emotion/core'
+import styled from '@emotion/styled'
+import { Switch, Route } from 'react-router-dom'
+import { Flex, Box } from '@rebass/grid/emotion'
+import { boxShadow, color } from 'styled-system'
 
-import HomePage from 'containers/HomePage/Loadable';
-import FeaturePage from 'containers/FeaturePage/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+// import HomePage from 'containers/HomePage/Loadable';
+// import FeaturePage from 'containers/FeaturePage/Loadable';
+// import NotFoundPage from 'containers/NotFoundPage/Loadable';
+// import Header from 'components/Header';
+// import Footer from 'components/Footer';
 
-import GlobalStyle from '../../global-styles';
+// import GlobalStyle from '../../global-styles';
 // max-width: calc(768px + 16px * 2);
 // margin: 0 auto;
 // display: flex;
@@ -30,55 +32,109 @@ import GlobalStyle from '../../global-styles';
 // const AppWrapper = styled('Flex')`
 //   padding: 0 10px;
 // `;
+const th = prop => ({ theme }) =>
+  prop.split('.').reduce((path, key) => (path && path[key]) || null, theme)
 
-const appWrapper = css`
-  padding: 0 10px;
-`;
+// const appWrapper = ({ colors }) => css`
+//   background-color: ${colors.background};
+//   min-height: 100vh;
+// `;
 
-const row = css`
-  border: 1px solid #aaa;
+// const row = ({ colors }) => css`
+//   background-color: ${colors.panelBackground};
+//   box-shadow: 2px 2px 10px ${colors.boxShadow};
+//   border-radius: 3px;
+//   display: grid;
+//   grid-template-rows: 1fr 2fr 1fr;
+//   min-height: 8em;
+// `;
+
+const nav = ({ colors }) => css`
+  background-color: ${colors.panelBackground};
+  box-shadow: 2px 2px 10px ${colors.boxShadow};
+  position: sticky;
+  top: 0;
+`
+
+const Wrapper = styled(Flex)`
+  display: grid;
+  grid-template-rows: 3em auto;
+  min-height: 100vh;
+`
+
+const Nav = styled(Flex)`
+  ${color};
+  ${boxShadow};
+  position: sticky;
+  top: 0;
+`
+
+const CellSection = styled(Box)`
+  ${color};
+`
+
+const Row = styled(Box)`
+  ${color};
+  ${boxShadow};
   border-radius: 3px;
-`;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+  min-height: 8em;
+`
 
-const chevronStyles = css`
-  height: 1em;
-`;
+const Title = styled(Box)`
+  ${color};
+  font-weight: bold;
+`
 
-const Chevron = () => (
-  <svg x="0px" y="0px" viewBox="0 0 512 512" css={chevronStyles}>
-    <g>
-      <path
-        d="M367.954,213.588L160.67,5.872c-7.804-7.819-20.467-7.831-28.284-0.029c-7.819,7.802-7.832,20.465-0.03,28.284
-   l207.299,207.731c7.798,7.798,7.798,20.486-0.015,28.299L132.356,477.873c-7.802,7.819-7.789,20.482,0.03,28.284
-   c3.903,3.896,9.016,5.843,14.127,5.843c5.125,0,10.25-1.958,14.157-5.873l207.269-207.701
-   C391.333,275.032,391.333,236.967,367.954,213.588z"
-      />
-    </g>
-  </svg>
-);
+const Description = styled(Box)`
+  ${color};
+  overflow: hidden;
+  white-space: nowrap;
+`
+
+const Amount = styled(Box)`
+  ${color};
+  text-align: right;
+`
+
+const Cell = () => (
+  <Row boxShadow={0} bg='panelBackground' justifyContent='center' m={3} p={3}>
+    <CellSection>
+      <Title color='text'>Title</Title>
+    </CellSection>
+    <CellSection>
+      <Description color='fadedText'>
+        DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription
+        Description
+      </Description>
+    </CellSection>
+    <CellSection>
+      <Amount color='text'>0</Amount>
+    </CellSection>
+  </Row>
+)
 
 const App = () => {
   return (
-    <Flex css={appWrapper}>
-      <Helmet titleTemplate="%s - Blue Coin" defaultTitle="Blue Coin">
-        <meta name="description" content="Record Keeping" />
+    <Wrapper flexWrap='wrap' bg='background'>
+      <Helmet titleTemplate='%s - Blue Coin' defaultTitle='Blue Coin'>
+        <meta name='description' content='Record Keeping' />
       </Helmet>
-      <Flex justifyContent="center" width={1} css={row}>
-        <Box width={1 / 5}>
-          <Chevron />
-        </Box>
-        <Box width={3 / 5}>
-          <Chevron />
-        </Box>
-        <Box width={1 / 5}>
-          <Chevron />
-        </Box>
-      </Flex>
-    </Flex>
-  );
-};
+      <Nav boxShadow={0} bg='panelBackground' width={1} />
+      <Box flexDirection='column' width={1} justifyContent='flex-start'>
+        <Cell />
+        <Cell />
+        <Cell />
+        <Cell />
+        <Cell />
+        <Cell />
+      </Box>
+    </Wrapper>
+  )
+}
 
-export default App;
+export default App
 
 /* <Helmet
         titleTemplate="%s - React.js Boilerplate"

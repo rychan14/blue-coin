@@ -49,7 +49,14 @@ const MOUNT_NODE = document.getElementById('app');
 
 // theme
 const theme = {
-  space: [12],
+  colors: {
+    background: '#2F363D',
+    panelBackground: '#434a50',
+    boxShadow: '#121518',
+    text: '#eee',
+    fadedText: '#aaa',
+  },
+  shadows: ['2px 2px 10px #121518'],
 };
 
 const render = messages => {
