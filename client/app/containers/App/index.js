@@ -15,7 +15,7 @@ import styled from '@emotion/styled'
 import { Switch, Route } from 'react-router-dom'
 import { Flex, Box } from '@rebass/grid/emotion'
 // import system from '@rebass/components/emotion'
-import { boxShadow, color, gridColumn, gridGap, gridTemplateColumns } from 'styled-system'
+import { boxShadow, color, gridColumn, gridGap, gridTemplateColumns, gridTemplateRows } from 'styled-system'
 
 // import HomePage from 'containers/HomePage/Loadable';
 // import FeaturePage from 'containers/FeaturePage/Loadable';
@@ -53,8 +53,6 @@ const Wrapper = styled(Box)`
 const Nav = styled(Flex)`
   ${color};
   ${boxShadow};
-  // grid-area: nav;
-  // grid-column: col-start / span 12;
   ${gridColumn};
   height: 3em;
   position: sticky;
@@ -62,8 +60,6 @@ const Nav = styled(Flex)`
 `
 
 const List = styled(Box)`
-  // grid-area: body;
-  // grid-column: col-start 2 / span 10;
   ${gridColumn};
 `
 
@@ -74,9 +70,9 @@ const CellSection = styled(Box)`
 const Row = styled(Box)`
   ${color};
   ${boxShadow};
+  ${gridTemplateRows};
   border-radius: 3px;
-  // display: grid;
-  // grid-template-rows: 1fr 2fr 1fr;
+  display: grid;
   min-height: 8em;
 `
 
@@ -97,7 +93,7 @@ const Amount = styled(Box)`
 `
 
 const Cell = () => (
-  <Row w={1} boxShadow={0} bg='panelBackground'>
+  <Row w={1} p={2} boxShadow={0} bg='panelBackground' gridTemplateRows='1fr 2fr 1fr'>
     <CellSection>
       <Title color='text'>Title</Title>
     </CellSection>
@@ -114,7 +110,7 @@ const Cell = () => (
 
 const App = () => {
   return (
-    <Wrapper bg='background' gridGap={8} gridTemplateColumns='repeat(12, [col-start] 1fr)'>
+    <Wrapper bg='background' gridGap={5} gridTemplateColumns='repeat(12, [col-start] 1fr)'>
       <Helmet titleTemplate='%s - Blue Coin' defaultTitle='Blue Coin'>
         <meta name='description' content='Record Keeping' />
       </Helmet>
