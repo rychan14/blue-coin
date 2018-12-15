@@ -56,7 +56,7 @@ const theme = {
     text: '#eee',
     fadedText: '#aaa',
   },
-  shadows: ['2px 2px 10px #121518'],
+  shadows: ['2px 2px 10px #121518']
 };
 
 const render = messages => {

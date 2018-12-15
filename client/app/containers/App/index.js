@@ -14,7 +14,8 @@ import { css, jsx } from '@emotion/core'
 import styled from '@emotion/styled'
 import { Switch, Route } from 'react-router-dom'
 import { Flex, Box } from '@rebass/grid/emotion'
-import { boxShadow, color } from 'styled-system'
+// import system from '@rebass/components/emotion'
+import { boxShadow, color, gridColumn, gridGap, gridTemplateColumns } from 'styled-system'
 
 // import HomePage from 'containers/HomePage/Loadable';
 // import FeaturePage from 'containers/FeaturePage/Loadable';
@@ -23,50 +24,47 @@ import { boxShadow, color } from 'styled-system'
 // import Footer from 'components/Footer';
 
 // import GlobalStyle from '../../global-styles';
-// max-width: calc(768px + 16px * 2);
-// margin: 0 auto;
-// display: flex;
-// min-height: 100%;
-// padding: 0 10px;
-// flex-direction: column;
-// const AppWrapper = styled('Flex')`
-//   padding: 0 10px;
-// `;
+
+// const Grid = system(
+//   { is: Box },
+//   { display: 'grid' },
+//   'gridGap',
+//   'gridColumnGap',
+//   'gridRowGap',
+//   'gridColumn',
+//   'gridRow',
+//   'gridAutoFlow',
+//   'gridAutoColumns',
+//   'gridAutoRows',
+//   'gridTemplateColumns',
+//   'gridTemplateRows'
+// )
+
 const th = prop => ({ theme }) =>
   prop.split('.').reduce((path, key) => (path && path[key]) || null, theme)
 
-// const appWrapper = ({ colors }) => css`
-//   background-color: ${colors.background};
-//   min-height: 100vh;
-// `;
-
-// const row = ({ colors }) => css`
-//   background-color: ${colors.panelBackground};
-//   box-shadow: 2px 2px 10px ${colors.boxShadow};
-//   border-radius: 3px;
-//   display: grid;
-//   grid-template-rows: 1fr 2fr 1fr;
-//   min-height: 8em;
-// `;
-
-const nav = ({ colors }) => css`
-  background-color: ${colors.panelBackground};
-  box-shadow: 2px 2px 10px ${colors.boxShadow};
-  position: sticky;
-  top: 0;
-`
-
-const Wrapper = styled(Flex)`
+const Wrapper = styled(Box)`
+  ${gridGap};
+  ${gridTemplateColumns};
   display: grid;
-  grid-template-rows: 3em auto;
   min-height: 100vh;
 `
 
 const Nav = styled(Flex)`
   ${color};
   ${boxShadow};
+  // grid-area: nav;
+  // grid-column: col-start / span 12;
+  ${gridColumn};
+  height: 3em;
   position: sticky;
   top: 0;
+`
+
+const List = styled(Box)`
+  // grid-area: body;
+  // grid-column: col-start 2 / span 10;
+  ${gridColumn};
 `
 
 const CellSection = styled(Box)`
@@ -77,8 +75,8 @@ const Row = styled(Box)`
   ${color};
   ${boxShadow};
   border-radius: 3px;
-  display: grid;
-  grid-template-rows: 1fr 2fr 1fr;
+  // display: grid;
+  // grid-template-rows: 1fr 2fr 1fr;
   min-height: 8em;
 `
 
@@ -99,13 +97,12 @@ const Amount = styled(Box)`
 `
 
 const Cell = () => (
-  <Row boxShadow={0} bg='panelBackground' justifyContent='center' m={3} p={3}>
+  <Row w={1} boxShadow={0} bg='panelBackground'>
     <CellSection>
       <Title color='text'>Title</Title>
     </CellSection>
     <CellSection>
       <Description color='fadedText'>
-        DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription
         Description
       </Description>
     </CellSection>
@@ -117,19 +114,19 @@ const Cell = () => (
 
 const App = () => {
   return (
-    <Wrapper flexWrap='wrap' bg='background'>
+    <Wrapper bg='background' gridGap={8} gridTemplateColumns='repeat(12, [col-start] 1fr)'>
       <Helmet titleTemplate='%s - Blue Coin' defaultTitle='Blue Coin'>
         <meta name='description' content='Record Keeping' />
       </Helmet>
-      <Nav boxShadow={0} bg='panelBackground' width={1} />
-      <Box flexDirection='column' width={1} justifyContent='flex-start'>
+      <Nav boxShadow={0} bg='panelBackground' gridColumn='span 12' width={1} />
+      <List width={1} gridColumn='col-start 2 / span 10'>
         <Cell />
         <Cell />
         <Cell />
         <Cell />
         <Cell />
         <Cell />
-      </Box>
+      </List>
     </Wrapper>
   )
 }
