@@ -11,9 +11,10 @@ import {
   gridTemplateColumns,
   gridTemplateRows
 } from "styled-system";
+import EntryList from "containers/EntryList";
 
-const th = prop => ({ theme }) =>
-  prop.split(".").reduce((path, key) => (path && path[key]) || null, theme);
+// const th = prop => ({ theme }) =>
+//   prop.split(".").reduce((path, key) => (path && path[key]) || null, theme);
 
 const Wrapper = styled(Box)`
   ${gridGap};
@@ -34,58 +35,6 @@ const Nav = styled(Flex)`
 const AppWrapper = styled(Box)`
   ${gridColumn};
 `;
-
-const List = styled(Box)``;
-
-const Cell = styled(Box)`
-  ${color};
-  ${boxShadow};
-  ${gridTemplateRows};
-  border-radius: 3px;
-  display: grid;
-  margin: 8px 0;
-  height: 8em;
-`;
-
-const CellSection = styled(Box)`
-  ${color};
-`;
-
-const Title = styled(Box)`
-  ${color};
-  font-weight: bold;
-`;
-
-const Description = styled(Box)`
-  ${color};
-  overflow: hidden;
-  white-space: nowrap;
-`;
-
-const Amount = styled(Box)`
-  ${color};
-  text-align: right;
-`;
-
-const Entry = () => (
-  <Cell
-    w={1}
-    p={2}
-    boxShadow={0}
-    bg="panelBackground"
-    gridTemplateRows="1fr 2fr 1fr"
-  >
-    <CellSection>
-      <Title color="text">Title</Title>
-    </CellSection>
-    <CellSection>
-      <Description color="fadedText">Description</Description>
-    </CellSection>
-    <CellSection>
-      <Amount color="text">0</Amount>
-    </CellSection>
-  </Cell>
-);
 
 const App = () => {
   return (
@@ -124,12 +73,8 @@ const App = () => {
           gridColumn="span 12"
           width={1}
         />
-        <AppWrapper p={2} gridColumn="col-start 1 / 13">
-          <List>
-            <Entry />
-            <Entry />
-            <Entry />
-          </List>
+        <AppWrapper px={3} gridColumn="col-start 1 / 13">
+          <EntryList />
         </AppWrapper>
       </Wrapper>
     </>
