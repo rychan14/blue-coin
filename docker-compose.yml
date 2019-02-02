@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  ui:
+    build: ./ui
+    command: npm run dev
+    volumes:
+      - ./ui:/app
+    ports:
+      - "5000:5000"
+    networks:
+      - front-tier
+      - back-tier
+
+volumes:
+  db-data:     
+
+networks:
+  front-tier:
+  back-tier:
