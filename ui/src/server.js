@@ -1,16 +1,21 @@
 import '@babel/polyfill'
-import Hapi from 'hapi'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import Layout from './index.js'
-require('dotenv').config()
+import Layout from 'ui/index.js'
+import Koa from 'koa'
+import Router from 'koa-router'
+// require('dotenv').config()
+
+const app = new Koa()
+const router = new Router()
+// const port = process.env.PORT || 5000
 
 const htmlTemplate = (reactDom) => `
   <!DOCTYPE html>
   <html>
     <head>
       <meta charset="utf-8">
-      <title>React SSR</title>
+      <title>React S</title>
     </head>
     
     <body>
@@ -20,31 +25,67 @@ const htmlTemplate = (reactDom) => `
   </html>
 `
 
-const server = Hapi.server({
-  port: process.env.PORT || 5000,
-  host: '0.0.0.0'
+// app.use(ctx => {
+//   const jsx = (<Layout />)
+//   ctx.body = htmlTemplate(renderToString(jsx))
+// })
+
+router.get('/', ctx => {
+  const jsx = (<Layout />)
+  ctx.body = htmlTemplate(renderToString(jsx))
 })
 
-server.route({
-  method: 'GET',
-  path: '/',
-  handler: (request, h) => {
-    const jsx = (<Layout />)
-    return htmlTemplate(renderToString(jsx))
-  }
-})
+// app.listen(port)
+app
+  .use(router.routes())
+  .use(router.allowedMethods())
 
-const init = async () => {
-  await server.start()
-  console.log(`Server running at: ${server.info.uri}`)
-}
+export default app
 
-process.on('unhandledRejection', (err) => {
-  console.log(err)
-  process.exit(1)
-})
+// import Hapi from 'hapi'
+// import Layout from './index.js'
+// require('dotenv').config()
 
-init()
+// const htmlTemplate = (reactDom) => `
+//   <!DOCTYPE html>
+//   <html>
+//     <head>
+//       <meta charset="utf-8">
+//       <title>React SSR</title>
+//     </head>
+
+//     <body>
+//       <div id="app">${reactDom}</div>
+//       <script src="./app.bundle.js"></script>
+//     </body>
+//   </html>
+// `
+
+// const server = Hapi.server({
+//   port: process.env.PORT || 5000,
+//   host: '0.0.0.0'
+// })
+
+// server.route({
+//   method: 'GET',
+//   path: '/',
+//   handler: (request, h) => {
+//     const jsx = (<Layout />)
+//     return htmlTemplate(renderToString(jsx))
+//   }
+// })
+
+// const init = async () => {
+//   await server.start()
+//   console.log(`Server running at: ${server.info.uri}`)
+// }
+
+// process.on('unhandledRejection', (err) => {
+//   console.log(err)
+//   process.exit(1)
+// })
+
+// init()
 // const http = require('http')
 // const port = process.env.PORT || 5000
 
