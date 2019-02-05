@@ -3,7 +3,7 @@ version: "3"
 services:
   ui:
     build: ./ui
-    command: npm run dev
+    command: npm start
     volumes:
       - ./ui:/app
     ports:
