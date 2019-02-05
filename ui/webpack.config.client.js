@@ -1,8 +1,6 @@
 require('dotenv').config()
 const path = require('path')
 const webpack = require('webpack')
-// const nodeExternals = require('webpack-node-externals')
-// const StartServerPlugin = require('start-server-webpack-plugin')
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -17,8 +15,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /.js?$/,
-        exclude: /node_modules/,
+        test: /\.js?$/,
+        include: [
+          path.join(__dirname, 'src', 'client'),
+          path.join(__dirname, 'src', 'components'),
+          path.join(__dirname, 'src', 'App'),
+        ],
         use: 'babel-loader',
       },
     ],
@@ -39,6 +41,12 @@ module.exports = {
     port: 5001,
     historyApiFallback: true,
     hot: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers':
+        'X-Requested-With, content-type, Authorization',
+    },
   },
   output: {
     path: path.resolve(__dirname, './public'),

@@ -4,13 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:production": "rimraf ./public/* && webpack",
-    "dev": "nodemon -L --watch src -e js,html --exec \"npm run build && npm run start\"",
-    "//": "node public/server.js",
+    "start": "rimraf ./public/* && webpack && node public/server.js",
     "start:client": "webpack-dev-server --config webpack.config.client.js",
     "start:server": "rimraf ./public/* && webpack --config webpack.config.server.js",
-    "start": "rimraf ./public/* && npm run start:server & npm run start:client",
-    "///": "rimraf ./public/* && npm-run-all --parallel start:server start:client",
+    "//": "rimraf ./public/* && npm run start:server & npm run start:client",
+    "start:dev": "rimraf ./public/* && npm-run-all --parallel start:server start:client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -24,14 +22,18 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
+    "@koa/cors": "^2.2.3",
     "dotenv": "^6.2.0",
     "hapi": "^18.0.1",
     "koa": "^2.7.0",
+    "koa-compress": "^3.0.0",
     "koa-helmet": "^4.0.0",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
+    "npm-run-all": "^4.1.5",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-router-dom": "^4.3.1",
     "rimraf": "^2.6.3"
   },
   "devDependencies": {

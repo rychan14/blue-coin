@@ -5,6 +5,9 @@ import { renderToString } from 'react-dom/server'
 import Koa from 'koa'
 import Router from 'koa-router'
 import helmet from 'koa-helmet'
+import compress from 'koa-compress'
+import cors from '@koa/cors'
+import serve from 'koa-static'
 
 import App from './App'
 
@@ -40,7 +43,10 @@ router.get('*', ctx => {
 })
 
 app
+  .use(compress())
   .use(helmet())
+  .use(cors())
+  .use(serve('./public'))
   .use(router.routes())
   .use(router.allowedMethods())
 
