@@ -1,0 +1,31 @@
+{
+  "name": "razzle-examples-with-koa",
+  "version": "2.4.1",
+  "license": "MIT",
+  "scripts": {
+    "start": "razzle start",
+    "test": "razzle test --env=jsdom",
+    "build": "razzle build",
+    "start:prod": "NODE_ENV=production node build/server.js"
+  },
+  "babel": {
+    "plugins": [
+      "emotion"
+    ]
+  },
+  "dependencies": {
+    "babel-plugin-emotion": "^10.0.7",
+    "emotion": "^10.0.7",
+    "emotion-server": "^10.0.7",
+    "koa": "^2.5.0",
+    "koa-helmet": "^3.3.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^4.0.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2"
+  },
+  "devDependencies": {
+    "razzle": "^2.4.1"
+  }
+}
