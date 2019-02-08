@@ -2,12 +2,15 @@ version: '3'
 
 services:
   ui:
+    environment: 
+      - ENV=docker
     build:
       context: ./client
     # command: npm start
     volumes:
       - ./client:/app:rw
-      - node_modules:/src/node_modules
+      # - node_modules:/src/node_modules
+      # - node_modules:/app/node_modules
     ports:
       - '5000:5000'
       - '5001:5001'
@@ -15,8 +18,8 @@ services:
     #   - front-tier
     #   - back-tier
 
-volumes:
-  node_modules:
+# volumes:
+#   node_modules:
 # networks:
 #   front-tier:
 #   back-tier:
